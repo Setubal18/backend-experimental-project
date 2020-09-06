@@ -5,10 +5,13 @@ import routes from "../routes/routes"
 // import connectionBD from '../database/connection'
 import cors from 'cors'
 import { port_serve } from './environments'
+import connectionBD from '../database/connection'
+// tslint:disable-next-line: new-parens
 export default new class ExpressServer {
+
 	private app: any
 
-	public constructor() {
+	constructor() {
 		this.app = express()
 		this.app.use(cors())
 		this.app.use(express.json())
@@ -16,7 +19,7 @@ export default new class ExpressServer {
 	}
 
 	public initServer() {
-		//connectionBD()
+		connectionBD()
 		this.app.use('/api', routes)
 		this.app.listen(port_serve, () => {
 			console.log(`Example app listening on port ${port_serve}!`);
