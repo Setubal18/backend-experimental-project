@@ -1,0 +1,3 @@
+DB_URI = Sua Conexão
+PORT_SERVER = Sua Porta
+SECRET =  Secrete para caso voce tenha algum token ou autenticação

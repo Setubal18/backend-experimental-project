@@ -1,6 +1,4 @@
-# [Template Back End]
-
-Descrição
+# Projeto de engenharia de software experimental
 
 ## .Env
 
