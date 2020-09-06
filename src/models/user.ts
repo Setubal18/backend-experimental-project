@@ -21,16 +21,16 @@ export interface userInterface extends Document {
 }
 
 const UserSchema = new Schema({
-	username: {
+	name: {
 		type: String,
 		required: true,
-		unique: true
 	},
 	email: new Schema({
 		email: {
 			type: String,
 			lowercase: true,
 			required: true,
+			unique: true
 		},
 	},
 		{
@@ -40,7 +40,7 @@ const UserSchema = new Schema({
 	password: new Schema({
 		password: {
 			type: String,
-			required: true
+			required: false
 		},
 	},
 		{
