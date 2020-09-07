@@ -5,9 +5,9 @@ export interface ProjectInterface extends Document {
 	title: string,
 	thema: string,
 	technicalArea?: string,
-	author?: [{ name: string, _id?: ObjectID }],
-	affliation?: [{ name: string, _id?: ObjectID }],
-	local: { name: string, _id?: ObjectID }
+	author?: [{ name: string, }],
+	affliation?: [{ name: string, }],
+	local: { name: string, }
 	data: Date
 	introduction?: string,
 	characterization?: {
@@ -53,7 +53,7 @@ const ProjectSchema = new Schema({
 	technicalArea: {
 		type: String
 	},
-	author: new Schema({
+	author: {
 		type: Array,
 		properties: {
 			name: {
@@ -62,34 +62,30 @@ const ProjectSchema = new Schema({
 			_id: ObjectID,
 			required: false
 		}
-	}),
-	affliation: new Schema({
+	},
+	affliation: {
 		type: Array,
 		properties: {
 			name: {
 				type: String
 			},
-			_id: ObjectID,
-			required: false
 		}
-	}),
-	local: new Schema({
+	},
+	local: {
 		type: Array,
 		properties: {
 			name: {
 				type: String
 			},
-			_id: ObjectID,
-			required: false
 		}
-	}),
+	},
 	data: {
 		type: Date,
 	},
 	introduction: {
 		type: String
 	},
-	characterization: new Schema({
+	characterization: {
 		type: Object,
 		properties: {
 			type: {
@@ -128,8 +124,8 @@ const ProjectSchema = new Schema({
 			}),
 			partners: ObjectID
 		}
-	}),
-	experimentalStudyDef: new Schema({
+	},
+	experimentalStudyDef: {
 		type: Object,
 		properties: {
 			objectStudy: {
@@ -154,7 +150,7 @@ const ProjectSchema = new Schema({
 				type: String
 			},
 		}
-	}),
+	},
 
 })
 
