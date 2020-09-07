@@ -9,9 +9,33 @@ export interface ProjectInterface extends Document {
 	affliation?: [{ name: string, _id?: ObjectID }],
 	local: { name: string, _id?: ObjectID }
 	data: Date
-	introduction?: ObjectID,
-	characterization?: ObjectID,
-	experimentalStudyDef?: ObjectID,
+	introduction?: string,
+	characterization?: {
+		type?: string,
+		domain?: string,
+		Language?: {
+			explanation?: string,
+			material?: string
+		}
+		partners?: ObjectID,
+		links: [{ link: string }]
+		estimatedAccomplishing?: string
+		estimatedReplicationnumber?: number,
+		glossary?: [{
+			slug: string,
+			description: string
+		}],
+		experimentalStudyDef?: {
+			objectStudy?: string,
+			globalobjective?: string,
+			specificAims?: string,
+			qualityFocus?: string,
+			context?: string,
+			questions?: string,
+			metrics?: string
+		},
+	},
+
 
 	getReturnJson(): any
 }
@@ -63,14 +87,75 @@ const ProjectSchema = new Schema({
 		type: Date,
 	},
 	introduction: {
-		type: ObjectID
+		type: String
 	},
-	characterization: {
-		type: ObjectID
-	},
-	experimentalStudyDef: {
-		type: ObjectID
-	},
+	characterization: new Schema({
+		type: Object,
+		properties: {
+			type: {
+				type: String
+			},
+			domain: {
+				type: String
+			},
+			Language: new Schema({
+				explanation: {
+					type: String
+				},
+				material: {
+					type: String
+				},
+			}),
+			links: new Schema({
+				type: Array,
+				properties: {
+					link: { Type: String }
+				}
+			}),
+			estimatedAccomplishing: {
+				type: String
+			},
+			estimatedReplicationnumber: {
+				type: Number
+			},
+			glossary: new Schema({
+				type: Array,
+				properties: {
+					slug: { type: String },
+					description: { type: String },
+				}
+
+			}),
+			partners: ObjectID
+		}
+	}),
+	experimentalStudyDef: new Schema({
+		type: Object,
+		properties: {
+			objectStudy: {
+				type: String
+			},
+			globalobjective: {
+				type: String
+			},
+			specificAims: {
+				type: String
+			},
+			qualityFocus: {
+				type: String
+			},
+			context: {
+				type: String
+			},
+			questions: {
+				type: String
+			},
+			metrics: {
+				type: String
+			},
+		}
+	}),
+
 })
 
 ProjectSchema.plugin(mongoosePaginate)
