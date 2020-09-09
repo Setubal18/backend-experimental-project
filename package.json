@@ -1,6 +1,6 @@
 {
 	"name": "engenhariasoftwaresxperimental",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Projeto Experimental Backend",
 	"main": "index.ts",
 	"scripts": {
