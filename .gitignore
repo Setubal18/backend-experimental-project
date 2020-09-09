@@ -2,6 +2,7 @@
 
 # DotEnv
 .env
+app.yaml
 
 # compiled output
 /dist
