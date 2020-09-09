@@ -2,8 +2,8 @@ runtime: nodejs12 # or nodejs10
 
 env_variables:
   DB_URI: "mongodb+srv://Seth:csdD3femN68ZVCVj@eng-experimental-db.s8qcl.mongodb.net/eng-experimental-db?retryWrites=true&w=majority"
-	PORT_SERVER: "8888"
-	SECRET: "de231a1d4518a79f53838af95309176f"
+  PORT_SERVER: "8888"
+  SECRET: "de231a1d4518a79f53838af95309176f"
 
 handlers:
 
