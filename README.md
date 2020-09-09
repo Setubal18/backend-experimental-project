@@ -1,10 +1,13 @@
-# [Template Back End]
-
-Descrição
+# Projeto de engenharia de software experimental
 
 ## .Env
 
 Altere .envExemple para .env e altere as informações contidas.
+
+### Documentação dos endpoints
+
+[Documentação para baixar via Postman](https://www.getpostman.com/collections/4112f772aad913a3a38a)
+[Documentação online](https://documenter.getpostman.com/view/6528108/TVCiUmwe)
 
 ## Tipos de commit
 

@@ -4,10 +4,13 @@
 	"description": "Projeto Experimental Backend",
 	"main": "index.ts",
 	"scripts": {
+		"start": "tsc && node build/index.js",
 		"tsc": "tsc",
 		"lint": "tslint tslint.json 'src/**",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "ts-node-dev --respawn src/index.ts --transpileOnly"
+		"dev": "ts-node-dev --respawn src/index.ts --transpileOnly",
+		"build": "tsc",
+		"deploy": "gcloud app deploy"
 	},
 	"keywords": [
 		"typescript",
