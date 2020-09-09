@@ -4,7 +4,7 @@
 	"description": "Projeto Experimental Backend",
 	"main": "index.ts",
 	"scripts": {
-		"start": "ts-node-dev --transpile-only src/index.ts ",
+		"start": "tsc",
 		"tsc": "tsc",
 		"lint": "tslint tslint.json 'src/**",
 		"test": "echo \"Error: no test specified\" && exit 1",
