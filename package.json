@@ -9,7 +9,8 @@
 		"lint": "tslint tslint.json 'src/**",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "ts-node-dev --respawn src/index.ts --transpileOnly",
-		"build": "tsc"
+		"build": "tsc",
+		"deploy": "gcloud app deploy"
 	},
 	"keywords": [
 		"typescript",
