@@ -5,10 +5,10 @@ export interface ProjectInterface extends Document {
 	title: string,
 	thema: string,
 	technicalArea?: string,
-	author?: [{ name: string, }],
-	affliation?: [{ name: string, }],
-	local: { name: string, }
-	data: Date
+	author?: [{ name?: string, }],
+	affliation?: [{ name?: string, }],
+	local?: [{ name?: string, }]
+	data?: Date
 	introduction?: string,
 	characterization?: {
 		type?: string,
@@ -17,13 +17,13 @@ export interface ProjectInterface extends Document {
 			explanation?: string,
 			material?: string
 		}
-		partners?: ObjectID,
-		links: [{ link: string }]
+		partners?: [{ name?: string }],
+		links: [{ link?: string }]
 		estimatedAccomplishing?: string
 		estimatedReplicationnumber?: number,
 		glossary?: [{
-			slug: string,
-			description: string
+			slug?: string,
+			description?: string
 		}],
 		experimentalStudyDef?: {
 			objectStudy?: string,
@@ -94,35 +94,42 @@ const ProjectSchema = new Schema({
 			domain: {
 				type: String
 			},
-			Language: new Schema({
+			Language: {
 				explanation: {
 					type: String
 				},
 				material: {
 					type: String
 				},
-			}),
-			links: new Schema({
+			},
+			links: {
 				type: Array,
 				properties: {
 					link: { Type: String }
 				}
-			}),
+			},
 			estimatedAccomplishing: {
 				type: String
 			},
 			estimatedReplicationnumber: {
 				type: Number
 			},
-			glossary: new Schema({
+			glossary: {
 				type: Array,
 				properties: {
 					slug: { type: String },
 					description: { type: String },
 				}
 
-			}),
-			partners: ObjectID
+			},
+			partners: {
+				type: Array,
+				properties: {
+					name: {
+						type: String
+					}
+				}
+			}
 		}
 	},
 	experimentalStudyDef: {
