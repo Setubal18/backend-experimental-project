@@ -7,7 +7,7 @@ export interface ProjectInterface extends Document {
 	technicalArea?: string,
 	author?: [{ name: string, }],
 	affliation?: [{ name: string, }],
-	local?: { name: string, }
+	local?: [{ name: string, }]
 	data?: Date
 	introduction?: string,
 	characterization?: {
