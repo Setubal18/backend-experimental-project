@@ -60,7 +60,7 @@ const ProjectSchema = new Schema({
 				type: String
 			},
 			_id: ObjectID,
-			required: false
+			required: false,
 		}
 	},
 	affliation: {
@@ -71,21 +71,17 @@ const ProjectSchema = new Schema({
 			},
 		}
 	},
-	local: {
-		type: Array,
-		properties: {
-			name: {
-				type: String
-			},
-		}
-	},
+	local: [{
+		type: ObjectID,
+		ref: 'locals',
+	}],
 	data: {
 		type: Date,
 	},
 	introduction: {
 		type: String
 	},
-	characterization: {
+	characterization: new Schema({
 		type: Object,
 		properties: {
 			type: {
@@ -122,17 +118,15 @@ const ProjectSchema = new Schema({
 				}
 
 			},
-			partners: {
-				type: Array,
-				properties: {
-					name: {
-						type: String
-					}
+			partners: [
+				{
+					type: ObjectID,
+					ref: 'locals',
 				}
-			}
+			]
 		}
-	},
-	experimentalStudyDef: {
+	}, { _id: true, timestamps: true }),
+	experimentalStudyDef: new Schema({
 		type: Object,
 		properties: {
 			objectStudy: {
@@ -157,7 +151,7 @@ const ProjectSchema = new Schema({
 				type: String
 			},
 		}
-	},
+	}, { _id: true, timestamps: true }),
 
 })
 
