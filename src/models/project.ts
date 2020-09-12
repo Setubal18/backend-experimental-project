@@ -5,9 +5,9 @@ export interface ProjectInterface extends Document {
 	title: string,
 	thema: string,
 	technicalArea?: string,
-	author?: [{ name?: string, }],
-	affliation?: [{ name?: string, }],
-	local?: [{ name?: string, }]
+	author?: [{ name: string, }],
+	affliation?: [{ _id: ObjectID, }],
+	local?: [{ _id: ObjectID, }]
 	data?: Date
 	introduction?: string,
 	characterization?: {
@@ -66,8 +66,9 @@ const ProjectSchema = new Schema({
 	affliation: {
 		type: Array,
 		properties: {
-			name: {
-				type: String
+			_id: {
+				type: ObjectID,
+				ref: 'locals'
 			},
 		}
 	},
