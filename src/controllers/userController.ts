@@ -10,8 +10,6 @@ class UserController {
 			email: { email: req.body.email },
 			password: { password: req.body.password },
 		})
-		console.log(user)
-
 		try {
 			if (await User.findOne({ email: user.email })) {
 				return res.status(400).send({ error: 'Usuário já cadastrado' })

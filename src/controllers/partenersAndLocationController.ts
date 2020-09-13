@@ -51,7 +51,6 @@ class PartenersAndLocationController {
 		const parteners = req.body
 		try {
 			if (id) {
-				console.log(parteners)
 				const errors: any[] = []
 				async () => {
 					if (await PartenersAndLocationModel.findOne(
@@ -88,7 +87,6 @@ class PartenersAndLocationController {
 
 		}
 		catch (error) {
-			console.log(error)
 			return res.send({ error: 'Algo de errado ao Parceiro/Local tente novamente' })
 		}
 	}
@@ -99,7 +97,6 @@ class PartenersAndLocationController {
 		if (id) {
 			query = Object.assign(query, { "_id": id })
 		}
-		console.log('aqui')
 		try {
 			const option: object = { limit, page }
 			PartenersAndLocationModel.paginate(query, option)
