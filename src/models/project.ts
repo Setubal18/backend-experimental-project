@@ -6,8 +6,8 @@ export interface ProjectInterface extends Document {
 	thema: string,
 	technicalArea?: string,
 	author?: [{ name: string, }],
-	affliation?: [{ name: string, }],
-	local?: [{ name: string, }]
+	affliation?: [{ locals_id: ObjectID, }],
+	locals?: [{ locals_id: ObjectID, }]
 	data?: Date
 	introduction?: string,
 	characterization?: {
@@ -17,13 +17,13 @@ export interface ProjectInterface extends Document {
 			explanation?: string,
 			material?: string
 		}
-		partners?: ObjectID,
-		links: [{ link: string }]
+		partners?: [{ name?: string }],
+		links: [{ link?: string }]
 		estimatedAccomplishing?: string
 		estimatedReplicationnumber?: number,
 		glossary?: [{
-			slug: string,
-			description: string
+			slug?: string,
+			description?: string
 		}],
 		experimentalStudyDef?: {
 			objectStudy?: string,
@@ -60,106 +60,111 @@ const ProjectSchema = new Schema({
 				type: String
 			},
 			_id: ObjectID,
-			required: false
+			required: false,
 		}
 	},
 	affliation: {
 		type: Array,
 		properties: {
-			name: {
-				type: String
+			local_id: {
+				type: ObjectID,
+				ref: 'partenersandlocations'
 			},
 		}
 	},
-	local: {
+	locals: {
 		type: Array,
 		properties: {
-			name: {
-				type: String
-			},
+			type: Object,
+			locals_id: {
+				type: ObjectID,
+				ref: 'partenersandlocations',
+			}
 		}
 	},
 	data: {
 		type: Date,
 	},
 	introduction: {
-		type: String
+		type: String,
+		maxlength: 450
 	},
-	characterization: {
-		type: Object,
-		properties: {
-			type: {
+	characterization: new Schema({
+		type: {
+			type: String
+		},
+		domain: {
+			type: String
+		},
+		Language: {
+			explanation: {
 				type: String
 			},
-			domain: {
+			material: {
 				type: String
 			},
-			Language: new Schema({
-				explanation: {
-					type: String
-				},
-				material: {
-					type: String
-				},
-			}),
-			links: new Schema({
-				type: Array,
-				properties: {
-					link: { Type: String }
-				}
-			}),
-			estimatedAccomplishing: {
-				type: String
-			},
-			estimatedReplicationnumber: {
-				type: Number
-			},
-			glossary: new Schema({
-				type: Array,
-				properties: {
-					slug: { type: String },
-					description: { type: String },
-				}
+		},
+		links: {
+			type: Array,
+			properties: {
+				link: { Type: String }
+			}
+		},
+		estimatedAccomplishing: {
+			type: String
+		},
+		estimatedReplicationnumber: {
+			type: Number
+		},
+		glossary: {
+			type: Array,
+			properties: {
+				slug: { type: String },
+				description: { type: String },
+			}
 
-			}),
-			partners: ObjectID
+		},
+		partners: {
+			type: Array,
+			properties: {
+				type: Object,
+				locals_id: {
+					type: ObjectID,
+					ref: 'partenersandlocations',
+				}
+			}
 		}
-	},
-	experimentalStudyDef: {
-		type: Object,
-		properties: {
-			objectStudy: {
-				type: String
-			},
-			globalobjective: {
-				type: String
-			},
-			specificAims: {
-				type: String
-			},
-			qualityFocus: {
-				type: String
-			},
-			context: {
-				type: String
-			},
-			questions: {
-				type: String
-			},
-			metrics: {
-				type: String
-			},
-		}
-	},
+	}, { _id: true, timestamps: true }),
+	experimentalStudyDef: new Schema({
+		objectStudy: {
+			type: String
+		},
+		globalobjective: {
+			type: String
+		},
+		specificAims: {
+			type: String
+		},
+		qualityFocus: {
+			type: String
+		},
+		context: {
+			type: String
+		},
+		questions: {
+			type: String
+		},
+		metrics: {
+			type: String
+		},
+	}, { _id: true, timestamps: true }),
 
-})
+}, { timestamps: true })
 
 ProjectSchema.plugin(mongoosePaginate)
 
 ProjectSchema.methods.getReturnJson = function () {
 	const returnJson = this.toJSON()
-	delete returnJson.password.password;
-
 
 	return returnJson
 }

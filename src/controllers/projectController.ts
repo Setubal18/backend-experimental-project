@@ -7,8 +7,10 @@ class ProjectController {
 		let project = new ProjectModel({})
 
 		project = Object.assign(project, req.body)
-
 		try {
+			if (await ProjectModel.findOne({ title: project.title })) {
+				return res.status(400).send({ error: 'Projeto já cadastrado' })
+			}
 			await project.save()
 			return res.send(
 				{
@@ -18,8 +20,7 @@ class ProjectController {
 			)
 		}
 		catch (error) {
-			console.log(error)
-			return res.send({ error: 'Algo de errado ao cadastrado tente novamente' })
+			return res.status(400).send({ error: 'Algo de errado ao cadastrado tente novamente' })
 		}
 
 	}
@@ -30,7 +31,6 @@ class ProjectController {
 		const project = req.body
 		try {
 			if (id) {
-				console.log(project)
 				await ProjectModel.updateOne({ _id: id }, project)
 				let update_project = await ProjectModel.findById({ _id: id })
 				return res.send(
@@ -41,8 +41,7 @@ class ProjectController {
 			}
 		}
 		catch (error) {
-			console.log(error)
-			return res.send({ error: 'Algo de errado ao Editar projeto tente novamente' })
+			return res.status(400).send({ error: 'Algo de errado ao Editar projeto tente novamente' })
 		}
 	}
 
@@ -52,7 +51,6 @@ class ProjectController {
 		if (id) {
 			query = Object.assign(query, { "_id": id })
 		}
-		console.log('aqui')
 		try {
 			const option: object = { limit, page }
 			ProjectModel.paginate(query, option)
