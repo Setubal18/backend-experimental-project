@@ -74,7 +74,7 @@ const ProjectSchema = new Schema({
 	},
 	local: [{
 		type: ObjectID,
-		ref: 'locals',
+		ref: 'partenersandlocations',
 	}],
 	data: {
 		type: Date,
@@ -121,7 +121,7 @@ const ProjectSchema = new Schema({
 		partners: [
 			{
 				type: ObjectID,
-				ref: 'locals',
+				ref: 'partenersandlocations',
 			}
 		]
 	}, { _id: true, timestamps: true }),
