@@ -22,7 +22,7 @@ class ProjectController {
 		}
 		catch (error) {
 			console.log(error)
-			return res.send({ error: 'Algo de errado ao cadastrado tente novamente' })
+			return res.status(400).send({ error: 'Algo de errado ao cadastrado tente novamente' })
 		}
 
 	}
@@ -45,7 +45,7 @@ class ProjectController {
 		}
 		catch (error) {
 			console.log(error)
-			return res.send({ error: 'Algo de errado ao Editar projeto tente novamente' })
+			return res.status(400).send({ error: 'Algo de errado ao Editar projeto tente novamente' })
 		}
 	}
 

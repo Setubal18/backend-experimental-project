@@ -6,8 +6,8 @@ export interface ProjectInterface extends Document {
 	thema: string,
 	technicalArea?: string,
 	author?: [{ name: string, }],
-	affliation?: [{ _id: ObjectID, }],
-	local?: [{ _id: ObjectID, }]
+	affliation?: [{ locals_id: ObjectID, }],
+	locals?: [{ locals_id: ObjectID, }]
 	data?: Date
 	introduction?: string,
 	characterization?: {
@@ -66,16 +66,22 @@ const ProjectSchema = new Schema({
 	affliation: {
 		type: Array,
 		properties: {
-			_id: {
+			local_id: {
 				type: ObjectID,
-				ref: 'locals'
+				ref: 'partenersandlocations'
 			},
 		}
 	},
-	local: [{
-		type: ObjectID,
-		ref: 'partenersandlocations',
-	}],
+	locals: {
+		type: Array,
+		properties: {
+			type: Object,
+			locals_id: {
+				type: ObjectID,
+				ref: 'partenersandlocations',
+			}
+		}
+	},
 	data: {
 		type: Date,
 	},
@@ -118,12 +124,16 @@ const ProjectSchema = new Schema({
 			}
 
 		},
-		partners: [
-			{
-				type: ObjectID,
-				ref: 'partenersandlocations',
+		partners: {
+			type: Array,
+			properties: {
+				type: Object,
+				locals_id: {
+					type: ObjectID,
+					ref: 'partenersandlocations',
+				}
 			}
-		]
+		}
 	}, { _id: true, timestamps: true }),
 	experimentalStudyDef: new Schema({
 		objectStudy: {
