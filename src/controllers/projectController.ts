@@ -7,8 +7,11 @@ class ProjectController {
 		let project = new ProjectModel({})
 
 		project = Object.assign(project, req.body)
-
+		console.log(project)
 		try {
+			if (await ProjectModel.findOne({ title: project.title })) {
+				return res.status(400).send({ error: 'Projeto já cadastrado' })
+			}
 			await project.save()
 			return res.send(
 				{

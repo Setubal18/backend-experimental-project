@@ -80,88 +80,81 @@ const ProjectSchema = new Schema({
 		type: Date,
 	},
 	introduction: {
-		type: String
+		type: String,
+		maxlength: 450
 	},
 	characterization: new Schema({
-		type: Object,
-		properties: {
-			type: {
+		type: {
+			type: String
+		},
+		domain: {
+			type: String
+		},
+		Language: {
+			explanation: {
 				type: String
 			},
-			domain: {
+			material: {
 				type: String
 			},
-			Language: {
-				explanation: {
-					type: String
-				},
-				material: {
-					type: String
-				},
-			},
-			links: {
-				type: Array,
-				properties: {
-					link: { Type: String }
-				}
-			},
-			estimatedAccomplishing: {
-				type: String
-			},
-			estimatedReplicationnumber: {
-				type: Number
-			},
-			glossary: {
-				type: Array,
-				properties: {
-					slug: { type: String },
-					description: { type: String },
-				}
+		},
+		links: {
+			type: Array,
+			properties: {
+				link: { Type: String }
+			}
+		},
+		estimatedAccomplishing: {
+			type: String
+		},
+		estimatedReplicationnumber: {
+			type: Number
+		},
+		glossary: {
+			type: Array,
+			properties: {
+				slug: { type: String },
+				description: { type: String },
+			}
 
-			},
-			partners: [
-				{
-					type: ObjectID,
-					ref: 'locals',
-				}
-			]
-		}
+		},
+		partners: [
+			{
+				type: ObjectID,
+				ref: 'locals',
+			}
+		]
 	}, { _id: true, timestamps: true }),
 	experimentalStudyDef: new Schema({
-		type: Object,
-		properties: {
-			objectStudy: {
-				type: String
-			},
-			globalobjective: {
-				type: String
-			},
-			specificAims: {
-				type: String
-			},
-			qualityFocus: {
-				type: String
-			},
-			context: {
-				type: String
-			},
-			questions: {
-				type: String
-			},
-			metrics: {
-				type: String
-			},
-		}
+		objectStudy: {
+			type: String
+		},
+		globalobjective: {
+			type: String
+		},
+		specificAims: {
+			type: String
+		},
+		qualityFocus: {
+			type: String
+		},
+		context: {
+			type: String
+		},
+		questions: {
+			type: String
+		},
+		metrics: {
+			type: String
+		},
 	}, { _id: true, timestamps: true }),
 
-})
+}, { timestamps: true })
 
 ProjectSchema.plugin(mongoosePaginate)
 
 ProjectSchema.methods.getReturnJson = function () {
 	const returnJson = this.toJSON()
-	delete returnJson.password.password;
-
 
 	return returnJson
 }
