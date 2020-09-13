@@ -2,7 +2,7 @@ import { Document, Schema, model, Mongoose, PaginateModel } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2'
 export interface PartenersAndLocationInterface extends Document {
 
-	institutions: {
+	institution: {
 		name: string
 		slug?: string
 	},
@@ -26,29 +26,25 @@ export interface PartenersAndLocationInterface extends Document {
 }
 
 const partenersAndLocationSchema = new Schema({
-	institutions: {
-		properties: {
-			name: {
-				type: String,
-				unique: true
-			},
-			slug: {
-				type: String,
-				unique: true
-			}
+	institution: new Schema({
+		name: {
+			type: String,
+			unique: true
+		},
+		slug: {
+			type: String,
+			unique: true
 		}
-	},
-	address: {
-		properties: {
-			zip_code: { type: String },
-			alley: { type: String },
-			address: { type: String },
-			complement: { type: String },
-			country: { type: String },
-			city: { type: String },
-			state: { type: String }
-		}
-	},
+	}, { _id: false, timestamps: true }),
+	address: new Schema({
+		zip_code: { type: String },
+		alley: { type: String },
+		address: { type: String },
+		complement: { type: String },
+		country: { type: String },
+		city: { type: String },
+		state: { type: String }
+	}, { _id: true, timestamps: true }),
 	phone:
 	{
 		type: String,
