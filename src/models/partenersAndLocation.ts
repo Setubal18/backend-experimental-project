@@ -29,36 +29,40 @@ const partenersAndLocationSchema = new Schema({
 	institution: new Schema({
 		name: {
 			type: String,
-			unique: true
+			unique: true,
+			trim: true
 		},
 		slug: {
 			type: String,
-			unique: true
+			unique: true,
+			trim: true
 		}
 	}, { _id: false, timestamps: true }),
 	address: new Schema({
-		zip_code: { type: String },
-		alley: { type: String },
-		address: { type: String },
-		complement: { type: String },
-		country: { type: String },
-		city: { type: String },
-		state: { type: String }
+		zip_code: { type: String, trim: true },
+		alley: { type: String, trim: true },
+		address: { type: String, trim: true },
+		complement: { type: String, trim: true },
+		country: { type: String, trim: true },
+		city: { type: String, trim: true },
+		state: { type: String, trim: true }
 	}, { _id: true, timestamps: true }),
 	phone:
 	{
 		type: String,
-		unique: true
+		unique: true,
+		trim: true
 	},
 	email: {
 		type: String,
-		unique: true
+		unique: true,
+		trim: true
 	},
 	url: {
 		type: String,
-		unique: true
+		unique: true,
+		trim: true
 	},
-
 })
 
 partenersAndLocationSchema.plugin(mongoosePaginate)

@@ -1,7 +1,7 @@
-import { Document, Schema, model, Mongoose } from 'mongoose';
+import { Document, Schema, model, Mongoose, PaginateModel } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2'
 
-export interface userInterface extends Document {
+export interface UserInterface extends Document {
 	name: string,
 	email: {
 		email: string,
@@ -14,6 +14,7 @@ export interface userInterface extends Document {
 		updatedAt?: Date
 
 	},
+	isAuthor: boolean
 	createdAt?: Date,
 	updatedAt?: Date
 
@@ -23,14 +24,20 @@ export interface userInterface extends Document {
 const UserSchema = new Schema({
 	name: {
 		type: String,
+		trim: true,
 		required: true,
+	},
+	isAuthor: {
+		type: Boolean,
+		default: true
 	},
 	email: new Schema({
 		email: {
 			type: String,
 			lowercase: true,
 			required: true,
-			unique: true
+			unique: true,
+			trim: true
 		},
 	},
 		{
@@ -60,4 +67,6 @@ UserSchema.methods.getReturnJson = function () {
 }
 
 
-export const User = model<userInterface>('user', UserSchema);
+interface UserModel<T extends Document> extends PaginateModel<T> { }
+export const UserModel: UserModel<UserInterface> =
+	model<UserInterface>('user', UserSchema) as UserModel<UserInterface>;
