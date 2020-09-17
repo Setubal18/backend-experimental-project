@@ -14,6 +14,7 @@ export interface userInterface extends Document {
 		updatedAt?: Date
 
 	},
+	isAuthor: boolean
 	createdAt?: Date,
 	updatedAt?: Date
 
@@ -24,6 +25,10 @@ const UserSchema = new Schema({
 	name: {
 		type: String,
 		required: true,
+	},
+	isAuthor: {
+		type: Boolean,
+		default: true
 	},
 	email: new Schema({
 		email: {
