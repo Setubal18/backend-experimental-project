@@ -17,7 +17,7 @@ export interface ProjectInterface extends Document {
 			explanation?: string,
 			material?: string
 		}
-		partners?: [{ name?: string }],
+		partners?: [{ locals_id: ObjectID, }]
 		links: [{ link?: string }]
 		estimatedAccomplishing?: string
 		estimatedReplicationnumber?: number,
@@ -84,6 +84,7 @@ const ProjectSchema = new Schema({
 	},
 	data: {
 		type: Date,
+		default: Date.now
 	},
 	introduction: {
 		type: String,
