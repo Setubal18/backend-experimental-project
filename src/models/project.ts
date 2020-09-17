@@ -7,7 +7,7 @@ export interface ProjectInterface extends Document {
 	thema: string,
 	technicalArea?: string,
 	context?: string,
-	author?: [{ name: string, }],
+	author?: [{ author_id: ObjectID, }],
 	affliation?: [{ locals_id: ObjectID, }],
 	locals?: [{ locals_id: ObjectID, }]
 	data?: Date
@@ -62,11 +62,11 @@ const ProjectSchema = new Schema({
 	author: {
 		type: Array,
 		properties: {
-			name: {
-				type: String
+			author_id: {
+				type: ObjectID,
+				trim: true,
+				ref: 'users'
 			},
-			_id: ObjectID,
-			required: false,
 		}
 	},
 	affliation: {
@@ -74,6 +74,7 @@ const ProjectSchema = new Schema({
 		properties: {
 			local_id: {
 				type: ObjectID,
+				trim: true,
 				ref: 'partenersandlocations'
 			},
 		}
