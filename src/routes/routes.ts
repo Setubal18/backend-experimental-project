@@ -7,6 +7,8 @@ const routes = express.Router()
 //Add your routes here
 routes.post('/user', UserController.create)
 
+routes.get('/user/authors', UserController.listAuthors)
+
 
 routes.post('/project', projectController.store)
 routes.put('/project', projectController.update)

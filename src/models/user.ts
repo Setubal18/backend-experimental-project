@@ -1,7 +1,7 @@
-import { Document, Schema, model, Mongoose } from 'mongoose';
+import { Document, Schema, model, Mongoose, PaginateModel } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2'
 
-export interface userInterface extends Document {
+export interface UserInterface extends Document {
 	name: string,
 	email: {
 		email: string,
@@ -65,4 +65,6 @@ UserSchema.methods.getReturnJson = function () {
 }
 
 
-export const User = model<userInterface>('user', UserSchema);
+interface UserModel<T extends Document> extends PaginateModel<T> { }
+export const UserModel: UserModel<UserInterface> =
+	model<UserInterface>('user', UserSchema) as UserModel<UserInterface>;
