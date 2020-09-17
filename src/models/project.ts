@@ -97,7 +97,31 @@ const ProjectSchema = new Schema({
 		type: String,
 		maxlength: 450
 	},
-	variables: VariableSchema,
+	variables: {
+		type: Array,
+		properties: new Schema({
+			type: Object,
+			variableIndepent: {
+				type: String,
+			},
+			variaveisDepente: {
+				type: Array,
+				properties: {
+					type: Object,
+					var: {
+						type: String
+					},
+					hipotese: {
+						type: String,
+					}
+				}
+			}
+
+		}, {
+			_id: false,
+			timestamps: true,
+		})
+	},
 	characterization: new Schema({
 		type: {
 			type: String,

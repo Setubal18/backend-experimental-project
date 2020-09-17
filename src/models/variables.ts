@@ -1,7 +1,7 @@
 import { Document, Schema } from 'mongoose';
 
-export interface VariablesInterface extends Document {
-	variable?: [
+export interface VariablesInterface {
+	variables?: [
 		{
 			variableIndepent: string,
 			variaveisDepente?: [{
@@ -14,7 +14,7 @@ export interface VariablesInterface extends Document {
 }
 
 export const VariableSchema = new Schema({
-	variable: {
+	variables: {
 		type: Array,
 		properties: new Schema({
 			type: Object,
