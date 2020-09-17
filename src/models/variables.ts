@@ -1,5 +1,4 @@
-import { Document, Schema, model, Mongoose, PaginateModel } from 'mongoose';
-import mongoosePaginate from 'mongoose-paginate-v2'
+import { Document, Schema } from 'mongoose';
 
 export interface VariablesInterface extends Document {
 	variable?: [
