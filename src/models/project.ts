@@ -1,10 +1,12 @@
 import { Document, Schema, model, Mongoose, PaginateModel } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2'
 import { ObjectID } from "mongodb"
+import { VariableSchema, VariablesInterface } from './variables';
 export interface ProjectInterface extends Document {
 	title: string,
 	thema: string,
 	technicalArea?: string,
+	context?: string,
 	author?: [{ name: string, }],
 	affliation?: [{ locals_id: ObjectID, }],
 	locals?: [{ locals_id: ObjectID, }]
@@ -25,6 +27,7 @@ export interface ProjectInterface extends Document {
 			slug?: string,
 			description?: string
 		}],
+		variables?: VariablesInterface
 		experimentalStudyDef?: {
 			objectStudy?: string,
 			globalobjective?: string,
@@ -44,14 +47,17 @@ const ProjectSchema = new Schema({
 	title: {
 		type: String,
 		required: true,
-		unique: true
+		unique: true,
+		trim: true
 	},
 	thema: {
 		type: String,
 		required: true,
+		trim: true
 	},
 	technicalArea: {
-		type: String
+		type: String,
+		trim: true
 	},
 	author: {
 		type: Array,
@@ -90,29 +96,35 @@ const ProjectSchema = new Schema({
 		type: String,
 		maxlength: 450
 	},
+	variables: VariableSchema,
 	characterization: new Schema({
 		type: {
-			type: String
+			type: String,
+			trim: true
 		},
 		domain: {
-			type: String
+			type: String,
+			trim: true
 		},
 		Language: {
 			explanation: {
-				type: String
+				type: String,
+				trim: true
 			},
 			material: {
-				type: String
+				type: String,
+				trim: true
 			},
 		},
 		links: {
 			type: Array,
 			properties: {
-				link: { Type: String }
+				link: { Type: String, trim: true }
 			}
 		},
 		estimatedAccomplishing: {
-			type: String
+			type: String,
+			trim: true
 		},
 		estimatedReplicationnumber: {
 			type: Number
@@ -120,8 +132,8 @@ const ProjectSchema = new Schema({
 		glossary: {
 			type: Array,
 			properties: {
-				slug: { type: String },
-				description: { type: String },
+				slug: { type: String, trim: true },
+				description: { type: String, trim: true },
 			}
 
 		},
@@ -138,27 +150,35 @@ const ProjectSchema = new Schema({
 	}, { _id: true, timestamps: true }),
 	experimentalStudyDef: new Schema({
 		objectStudy: {
-			type: String
+			type: String,
+			trim: true
 		},
 		globalobjective: {
-			type: String
+			type: String,
+			trim: true
 		},
 		specificAims: {
-			type: String
+			type: String,
+			trim: true
 		},
 		qualityFocus: {
-			type: String
+			type: String,
+			trim: true
 		},
 		context: {
-			type: String
+			type: String,
+			trim: true
 		},
 		questions: {
-			type: String
+			type: String,
+			trim: true
 		},
 		metrics: {
-			type: String
+			type: String,
+			trim: true
 		},
-	}, { _id: true, timestamps: true }),
+	},
+		{ _id: true, timestamps: true }),
 
 }, { timestamps: true })
 

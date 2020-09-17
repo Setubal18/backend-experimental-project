@@ -24,6 +24,7 @@ export interface UserInterface extends Document {
 const UserSchema = new Schema({
 	name: {
 		type: String,
+		trim: true,
 		required: true,
 	},
 	isAuthor: {
@@ -35,7 +36,8 @@ const UserSchema = new Schema({
 			type: String,
 			lowercase: true,
 			required: true,
-			unique: true
+			unique: true,
+			trim: true
 		},
 	},
 		{
